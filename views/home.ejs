@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://bookmane.in/collekt/config.ejs"></script>
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Collekt</title>
+    <style>
+        .container {
+            text-align: center;
+            margin: 0 auto;
+            padding: 0 auto;
+            padding-top: 50px;
+            align-items: center;
+
+        }
+
+        body {
+            background-color: white;
+            color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #logo {
+            background-color: white;
+            width: 100%;
+
+
+        }
+
+        #cardss {
+            line-height: 20px;
+            margin: 0 auto;
+            width: 300px;
+            height: 100px;
+            padding: 10px;
+
+            border-style: none;
+
+
+            background-color: #fff;
+
+
+            margin-top: 10px;
+            box-shadow: 2px 2px 2px 2px rgba(129, 129, 129, 0.164);
+
+
+        }
+
+        h2 {
+            color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: normal;
+            font-size: 18px;
+
+        }
+
+        p {
+            font-size: 15px;
+        }
+
+        h3 {
+            font-size: 15px;
+            color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: normal
+        }
+
+        #cardss:hover {
+            box-shadow: 0px 0px 2px 2px rgba(129, 129, 129, 0.164);
+        }
+
+        .classyBtn {
+            background-color: rgb(80, 189, 240);
+            /* background-color: rgb(97, 41, 129);; */
+            border-style: none;
+            padding: 8px;
+            border-radius: 5px;
+            color: white;
+            font-size: 12px;
+            width: 100px;
+            margin: 10px;
+
+
+        }
+
+        #info {
+            width: 100%;
+
+        }
+
+        .txt {
+            margin: 20px;
+            margin-top: -20px;
+            color: purple
+        }
+
+        #icons {
+            display: none;
+        }
+
+        .download {
+            border-style: none;
+            color: white;
+            background-color: rgb(80, 189, 240);
+            /* background-color:rgb(94, 39, 126); */
+            width: 350px;
+            border-radius: 5px;
+            height: 50px;
+            margin-top: 30px;
+
+        }
+
+        .download:hover {
+            box-shadow: 4px 4px 2px 2px rgba(129, 129, 129, 0.164);
+        }
+
+        @media (min-width: 700px) {
+            .grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            #icons {
+                display: block;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+            }
+
+            #info {
+                width: 40%;
+                float: right;
+            }
+            .demogif {
+
+                width: 320x;
+                margin: "auto";
+                height: 300px;
+
+
+            }
+            #logo {
+                width: 60%;
+                /* background-color: #333; */
+                margin-left: 150px;
+            }
+            #im {
+                margin-left: 350px;
+
+            }
+
+            #cardss {
+
+                /* text-align: justify; */
+                box-shadow: none;
+                line-height: 20px;
+                border-style: none;
+                width: 55%;
+                height: 150px;
+                padding-top: 25px;
+                background-color: white;
+                border-radius: 10px;
+
+
+            }
+            .download {
+                margin-top: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="info">
+            <button id="gif" class="classyBtn">How it Works</button>
+            <button id="downloadsmall" class="classyBtn">Download</a></button>
+        </div>
+
+        <div id="logo">
+            <img id="im" src="https://bookmane.in/collekt/images/logo.png" target="_blank">
+        </div>
+
+
+        <div>
+            <h2>Simple way to collect your social media contacts</h2>
+
+        </div>
+        <div class="grid">
+
+            <div id="cardss">
+                <div id="icons">
+                    <img width="35px" height="35px" src="https://bookmane.in/collekt/images/download.png" target="_blank">
+                </div>
+
+                <h2>Download Chrome Extension</h2>
+                <p>Here is the <a href="#">link</a> to download the extension and get started.</p>
+
+                <!-- <p>Click<a href="#"> here</a> to download</p> -->
+            </div>
+            <div id="cardss">
+                <div id="icons">
+                    <img width="35px" height="35px" src="https://bookmane.in/collekt/images/card.png" target="_blank">
+                </div>
+                <h2>Save Contacts into extension</h2>
+                <p>Browse through the web profiles to collect cards that can be viewed anytime</p>
+            </div>
+            <div id="cardss">
+                <div id="icons">
+                    <img width="35px" height="35px" src="https://bookmane.in/collekt/images/list.png" target="_blank">
+                </div>
+                <h2>Create and share list</h2>
+                <p>Create a personalised list. Add profile card. Share with people</p>
+
+            </div>
+        </div>
+        <button class="download">Download from chrome store</button>
+
+    </div>
+    <script> 
+        $(function () {
+            $('#gif').click(function () {
+                $(".grid").empty()
+                htmlElement = " ";
+                htmlElement += ' <div>'
+                htmlElement += '</div>'
+                htmlElement += ' <div >'
+                htmlElement += '<div class="demogif">';
+                htmlElement += '<img width="100%" height="100%" src="' + domain + '/images/demo.gif" ">';
+
+                htmlElement += '</div>';
+                htmlElement += '</div>'
+                htmlElement += ' <div >'
+                htmlElement += '</div>'
+                $('.grid').append(htmlElement)
+
+            })
+
+            $('#downloadsmall').click(function () {
+                window.open('https://chrome.google.com/webstore/detail/collekt/eihmeaiefebhbomhlmaiflcoomjfghpm', '_blank'); 
+            })
+
+            $('.download').click(function () {
+                window.open('https://chrome.google.com/webstore/detail/collekt/eihmeaiefebhbomhlmaiflcoomjfghpm', '_blank'); 
+            })
+        })
+    </script>
+</body>
+
+</html>

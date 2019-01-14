@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="/collekt/config.js"></script>
+    <style>
+        .activ_button {
+            background-color: red;
+            color: white;
+            border-style: none;
+            border-radius: 3px;
+
+        }
+
+        #table {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center;
+
+        }
+
+        #table td,
+        #table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+
+        }
+
+        #table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #table tr:hover {
+            background-color: #ddd;
+        }
+
+        #table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: black;
+            color: white;
+        }
+    </style>
+
+    <script>
+        $(document).delegate('button', 'click', function (button) {
+            btName = button.currentTarget.id
+            console.log(btName)
+            acti = 1;
+            if ($('#' + btName).attr("class") == "btn btn-danger") {
+              
+                acti = 1
+                console.log("making acti "+acti)
+            }
+            else {
+                
+                acti = 0;
+            }
+            var settings1 = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://bookmane.in/collekt/user/" +btName,
+                "method": "PUT",
+                "headers": {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                  
+                },
+                "data": {
+
+                    "active": acti,
+
+                }
+            }
+
+            $.ajax(settings1).then(function (response) {
+                console.log("the transactionhas happened")
+                console.log(response)
+                if (response) {
+                    console.log("the transaction is successful");
+                    if (acti == 1) {
+                        $('#' + btName).attr("class", "btn btn-info");
+                        $('#' + btName).text("Activate")
+                    }
+                    
+                    else {
+                        $('#' + btName).attr("class", "btn btn-danger");
+                        $('#' + btName).text("De-activate")
+                    }
+                }
+
+                });
+            
+            });
+        
+    
+
+
+        $(function () {
+
+
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://bookmane.in/collekt/user/",
+                "method": "GET",
+                "headers": {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+
+            }
+
+            $.ajax(settings).done(function (response) {
+                if (response.data) {
+                    var btn_cls = " ";
+                    var len =response.data.length;
+                    console.log(response.data);
+                    var txt = "";
+                    if (len > 0) {
+                        $.each(response.data, function (key, value) {
+                            if (value.active == 0) {
+                                btn_cls = "btn-danger";
+                                btnText="De-activate"
+                            }
+                            else {
+                                btn_cls = "btn-info";
+                                btnText="Activate"
+                            }
+                            if (value.username && value.email) {
+                                txt += "<tr><td>" + value.username + "</td><td>" + value.email + "</td><td>"
+
+                                    + value.date + "</td><td>" + value.plan + "</td><td><button class='btn " + btn_cls + "'  id='" + value._id + "'>"+btnText+"</button></td><td>"
+
+                                    + value.payment + "</td></tr>";
+                            }
+                        });
+                        if (txt != "") {
+                            $("#table").append(txt).removeClass("hidden");
+                        }
+                    }
+                }
+            });
+
+        })
+
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>I am Admin</h1>
+        <table id="table">
+            <tr>
+                <th>Name</th>
+                <th>Email Address</th>
+                <th>Date of creation</th>
+                <th>Plan</th>
+                <th>Active Status</th>
+                <th>Payment</th>
+
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

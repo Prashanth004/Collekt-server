@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script
+    src="https://code.jquery.com/jquery-2.2.4.js"
+    integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+    crossorigin="anonymous"></script>
+<script src="/collekt/config.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+    $(function () {
+    $('#admin_login').click(function(){
+        
+        var email=$('#admin_email').val()
+        var password = $('#admin_password').val()
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://bookmane.in/collekt/auth/admin/login",
+            "method": "POST",
+            "headers": {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "ETag": "W/\"33-jJ6oGyfG3WUduw04mEH4Yt4ZJuY\"",
+            "cache-control": "no-cache",
+            "Postman-Token": "546c71c1-038f-4bb9-8018-2837874107d5"
+            },
+            "data": {
+            "email": email,
+            "password": password
+            }
+        }
+        
+        $.ajax(settings).done(function (response) {
+            console.log(response)
+            alert(response)
+            // if( response.success == 1){
+               
+            //     window.open("https://bookmane.in/collekt/admin/dashboard","_self")
+            // }
+            // else{
+            //     alert("unable to login ")
+
+            // }
+        });
+    })
+})
+        
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div  class="form-group" style="width:300px;margin-top: 150px; margin-left: 300px">
+    <label>Email id:</label>
+    <input  class="form-control"type="text" id="admin_email">
+    <br>
+    <label>Password:</label>
+    <input type="text" class="form-control" id="admin_password">
+    <br>
+    <button id="admin_login" class="btn btn-primary">Login</button>
+    <button id="admin_Signup" class='btn btn-primary'>Signup</button>
+</div>
+</div>
+
+
+</body>
+
+</html>
