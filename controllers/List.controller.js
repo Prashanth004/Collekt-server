@@ -169,6 +169,51 @@ exports.list_update_remove_card = function (req, res, next) {
 }
 
 
+exports.list_update_remove_many_card = function (req, res, next) {
+    if (!req.user) {
+        res.status(401).send({ success: 0, msg: "You should login" })
+    } else {
+
+        var flag = 1
+        cardsList = JSON.parse(req.body.cardsId)
+        console.log("typeof(req.body.cardsId) : ",typeof(cardsList))
+        console.log("cardsList : ",cardsList)
+       
+                Lists.update({ session_id: req.user._id, _id: req.params.id  }, { $pullAll: { Cards_id:cardsList} }, function (err, data) {
+                    if (err) {
+                        res.status(500).send({
+                            success: 0,
+                            error: err
+                        })
+                    }
+                    else {
+
+                       Cards.update({session_id: req.user._id,_id: {$in:cardsList} },{ $pull: { lists:req.params.id } }, { multi: true }, function (err, data) {
+                           if(err){
+                            res.status(500).send({
+                                success: 0,
+                                error: err
+                            })
+                           }
+                           else{
+                            res.status(200).send(
+                                {
+                                    success: 1,
+                                    data: data
+                                });
+                           }
+                       })
+
+                     
+                    }
+
+                });
+           
+    }
+
+}
+
+
 
 exports.lists_delete = function (req, res, next) {
     if (!req.user) {

@@ -8,6 +8,7 @@ router.get('/',List_controller.list_get);
 router.get('/:id',List_controller.list_get_id);
 router.put('/ad/:id',List_controller.list_update_add_card);
 router.put('/rm',List_controller.list_update_remove_card);
+router.put('/rm/:id',List_controller.list_update_remove_many_card)
 
 router.delete('/:id',List_controller.lists_delete);
 

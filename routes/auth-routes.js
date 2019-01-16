@@ -51,11 +51,11 @@ router.get('/google', passport.authenticate('google', {
 }));
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    data={
-		close:1,
-		refresh:1
-	}
-	io.sockets.emit('closeiframe', data)
+      dataframe={
+        close:1,
+        refresh:1
+      }
+      io.sockets.emit('closeiframe', dataframe)
     return res.render('redirect.ejs')
 });
 
