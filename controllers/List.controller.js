@@ -8,9 +8,11 @@ exports.list_create = function (req, res, next) {
     if (!req.user) {
         res.status(401).send({ success: 0, msg: "You should login" })
     } else {
+        console.log(" req.body.list_name : "+req.body.list_name)
 
-        Lists.find({ session_id: req.session.userId, name: req.body.list_name }, function (err, lists) {
+        Lists.find({ session_id: req.user._id, List_name: req.body.list_name }, function (err, lists) {
             if (err) res.status(400).send(err);
+            console.log("lists : ",lists)
             if (lists.length == 0) {
                 let new_list = new Lists(
                     {
@@ -38,8 +40,8 @@ exports.list_create = function (req, res, next) {
 
             }
             else {
-                res.status(450).send({
-                    status: 0,
+                res.status(200).send({
+                    success: 0,
                     msg: "the list name alreasy exixts"
 
                 });
@@ -95,9 +97,7 @@ exports.list_update_add_card = function (req, res, next) {
                 }
             }
             Cards.find({ session_id: req.user._id, _id: req.body.Cards_id }, function (err, data) {
-                if ((data[0].lists).length > 2) {
-                    limit = 0
-                }
+               
             }).then(function () {
                 if (exists == 1 && limit == 1) {
                     Lists.findByIdAndUpdate({ "_id": req.params.id }, { $push: { "Cards_id": req.body.Cards_id } }, function (err, data) {
@@ -124,13 +124,7 @@ exports.list_update_add_card = function (req, res, next) {
                         limit: 0
                     })
                 }
-                else if (limit == 0) {
-                    res.status(200).send({
-                        success: 0,
-                        card_exists: 0,
-                        limit: 1
-                    })
-                }
+
             })
         });
     }
@@ -140,7 +134,7 @@ exports.list_update_add_card = function (req, res, next) {
 
 
 
-exports.list_update_remove_card = function (req, res, next) {
+exports.list_update_remove_many_card = function (req, res, next) {
     if (!req.user) {
         res.status(401).send({ success: 0, msg: "You should login" })
     } else {
@@ -169,17 +163,15 @@ exports.list_update_remove_card = function (req, res, next) {
 }
 
 
-exports.list_update_remove_many_card = function (req, res, next) {
+exports.list_update_remove_card = function (req, res, next) {
     if (!req.user) {
         res.status(401).send({ success: 0, msg: "You should login" })
     } else {
 
         var flag = 1
-        cardsList = JSON.parse(req.body.cardsId)
-        console.log("typeof(req.body.cardsId) : ",typeof(cardsList))
-        console.log("cardsList : ",cardsList)
+   
        
-                Lists.update({ session_id: req.user._id, _id: req.params.id  }, { $pullAll: { Cards_id:cardsList} }, function (err, data) {
+                Lists.update({ session_id: req.user._id, _id: req.params.id  }, { $pull: { Cards_id:req.body.cardsId} }, function (err, data) {
                     if (err) {
                         res.status(500).send({
                             success: 0,
@@ -188,7 +180,7 @@ exports.list_update_remove_many_card = function (req, res, next) {
                     }
                     else {
 
-                       Cards.update({session_id: req.user._id,_id: {$in:cardsList} },{ $pull: { lists:req.params.id } }, { multi: true }, function (err, data) {
+                       Cards.update({session_id: req.user._id,_id: req.body.cardsId },{ $pull: { lists:req.params.id } }, { multi: true }, function (err, data) {
                            if(err){
                             res.status(500).send({
                                 success: 0,
