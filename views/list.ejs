@@ -1,275 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- <script src="https://bookmane.in/collekt/config.ejs"></script> -->
-    <script src="http://localhost:1234/config.ejs"></script>
-
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Collekt</title>
-
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script> -->
-
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://bookmane.in/collekt/config.ejs"></script>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Collekt</title>
+    
+        <!-- <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script> -->
+    
     <style>
-        body {}
-
-        .demogif {
+        body{}
+          .demogif{
             height: 500px;
-            width: 400px;
-        }
-
-        img {
+        width:400px;
+          }
+        img{ 
             /* border-radius:50%; */
         }
-
-
-
-
-
+       
+     
+    
         #List_div {
-            height: 50px;
-            width: 300px;
-            margin: 0 auto;
-            box-shadow: #ddd;
-            padding: 20px;
-            font-size: 12px;
-
-            background-color: white;
-            border-radius: 5px;
-            border-bottom-left-radius: 0px;
-            border-bottom-right-radius: 0px;
-            box-shadow: 0px 2px 2px 2px rgba(216, 216, 216, 0.164);
-            border: 0.5px;
-
+		height: 50px;
+        width:300px;
+		margin :0 auto;
+		box-shadow: #ddd;
+	padding:20px;
+		font-size: 12px;
+	
+		background-color: white;
+		border-radius: 5px;
+		border-bottom-left-radius: 0px;
+		border-bottom-right-radius: 0px;
+        box-shadow: 0px 2px 2px 2px rgba(216, 216, 216, 0.164);
+		border: 0.5px;
+	}
+    #clard_lst{
+        margin :0 auto;
+        padding:20px;
+        width: 300px;
+        background-color:rgb(241, 246, 248);
+       
+    }
+    .cardss{
+width:90%;
+height: 60px;
+padding:10px;
+background-color: white;
+margin-bottom:20px;
+margin-left:20px;
+border-radius:5px;
+    }
+    .pic{
+    width:35px;
+      height: 37px;
+      float: right;
+     position:relative;
+     top:-30px;
+      }
+     
+        #logo{
+    align:centre;
+            
         }
-
-        #clard_lst {
-            margin: 0 auto;
-            padding: 20px;
-            width: 300px;
-            background-color: rgb(241, 246, 248);
-
-        }
-
-        .cardss {
-            width: 90%;
-            height: 60px;
-            padding: 10px;
-            background-color: white;
-            margin-bottom: 20px;
-            margin-left: 20px;
-            border-radius: 5px;
-        }
-
-        .pic {
-            width: 35px;
-            height: 37px;
-            float: right;
-            position: relative;
-            top: -30px;
-        }
-
-        #logo {
-            align: centre;
-
-        }
-
-        body {
-            background-color: white;
+        body{
+            background-color:white;
             text-align: center;
             align-content: center;
             align-items: center;
         }
-
-        #a1 {
-            color: white;
+      
+        #a1{
+            color:white;
             text-emphasis-color: white;
         }
-
-        .name {
-            width: 50%;
-
+        .name{
+            width:50%;
+         
         }
-
-        .demogif {
-            margin: auto;
-            width: 300px;
-
-            height: 300px;
-
+        .demogif{
+    margin:auto;
+            width:300px;
+      
+      height: 300px;
+    
+  }
+        #info{
         }
-
-        #info {}
-
-        .classyBtn {
+        
+        .classyBtn{
             background-color: rgb(80, 189, 240);
-            border-style: none;
-            padding: 5px;
-            border-radius: 5px;
-            color: white;
-            font-size: 12px;
-            width: 100px;
-            margin: 20px;
-
-
+            border-style:none;
+            padding:5px;
+            border-radius:5px;
+            color:white;
+            font-size:12px;
+            width:100px;margin:20px;
         }
-
-
-
         @media (min-width: 700px) {
-            .grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-            }
-            .grid1 {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-            }
-
-
-
-            #logo {}
-            #id {
-                margin-left: 100px;
-
-            }
-            .demogif {
-                /* padding-top:100px; */
-                width: 350px;
-                margin: "auto";
-                height: 400px;
-
-            }
-
-            #info {}
-
-
-            #List_div {
-                /* margin-top:100px; */
-            }
-            #clard_lst {}
-
-
-        }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .grid1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+  #logo {
+   
+  }
+  #id{
+     margin-left:100px;
+  }
+  .demogif{
+      /* padding-top:100px; */
+            width:350px;
+      margin:"auto";
+      height: 400px;
+    
+  }
+  #info{
+  
+  }
+ #List_div{
+/* margin-top:100px; */
+ } 
+ #clard_lst{
+ }
+  
+}
     </style>
 </head>
-
 <body>
-    <div>
+ <div >
+    
+    <div id="logo" >
+        <a href="https://bookmane.in/collekt/home/">
+    <img id="im"  src="https://bookmane.in/collekt/images/logo.png"  target="_blank">
+</a>
+</div>
+<div id="main" >
+          
+</div>
 
-        <div id="logo">
-            <a href="http://localhost:1234/home/">
-                <img id="im" src="http://localhost:1234/images/logo.png" target="_blank">
-            </a>
-        </div>
-        <div id="main">
-
-        </div>
-
-        <div id="info">
-            <button id="gif" class="classyBtn"><a id="a1" href="#"></a>How it Works</button>
-            <button class="classyBtn"><a id="a1" href="https://chrome.google.com/webstore/detail/collekt/eihmeaiefebhbomhlmaiflcoomjfghpm"
-                    target="_blank"></a>Download</button>
-
+<div id="info">
+    <button id="gif" class="classyBtn"><a id="a1" href="#"></a>How it Works</button>
+    <button class="classyBtn"><a id="a1" href="https://chrome.google.com/webstore/detail/collekt/eihmeaiefebhbomhlmaiflcoomjfghpm" target="_blank"></a>Download</button>
 
 
 
-        </div>
+   
+</div>
 
-    </div>
-
-
+</div>
+   
+  
     <!-- <h1>{{ listID}}</h1> -->
     <script> 
-
-        $(function () {
-            $('#gif').click(function () {
-                $('#main').empty()
-                var htmlElement = " "
-                htmlElement += '<div class="List_div">';
-                htmlElement += '<div class="demogif">';
-                htmlElement += '<img width="100%" height="100%" src="' + domain + '/images/demo.gif" ">';
-
-                htmlElement += '</div>';
-                htmlElement += '</div>';
-                $('#main').append(htmlElement)
-
+    $(function(){
+$('#gif').click(function(){
+    $('#main').empty()
+    var htmlElement = " "
+    htmlElement += '<div class="List_div">';
+    htmlElement += '<div class="demogif">';
+htmlElement += '<img width="100%" height="100%" src="'+domain+'/images/demo.gif" ">';
+htmlElement += '</div>';
+htmlElement += '</div>';
+$('#main').append(htmlElement)
+})
+             var myVar = <%- (listID) %>;
+          
+              var list_setting = {
+	     "async": true,
+	    "crossDomain": true,
+	     "url": domain+"/share/list/"+myVar,
+	    "method": "GET",
+	    "headers": {
+	         "Content-Type": "application/x-www-form-urlencoded",
+	     },
+	 }
+	 $.ajax(list_setting).done(function (response) {
+         var htmlElement = " "
+  
+    htmlElement += '<div id="List_div">';
+    htmlElement += '<div class="div_name">';
+    htmlElement += '<h4>' +response.msg[0].List_name+ '</h4>';
+    htmlElement += '</div>';
+    htmlElement += '</div>';
+    htmlElement += '<div id="clard_lst" >';
+    for(var cards in response.msg[0].Cards_id){
+    htmlElement += ' <div class="cardss">';
+            var settings = {
+  "async": false,
+  "crossDomain": true,
+  "url": domain+"/share/card/"+response.msg[0].Cards_id[cards],
+  "method": "GET",
+  "headers": {
+    "Content-Type": "application/x-www-form-urlencoded",
+   
+  },
+  
+}
+$.ajax(settings).done(function (response1) {
+    htmlElement += '<a href="'+response1.msg[0].profile_url+'" target="_blank" >';
+    htmlElement += '<div class = "name">';
+        
+    htmlElement += '<p>'+response1.msg[0].name+'</p>';
+    htmlElement += '</div>';
+    htmlElement += '<div class=pic >';
+htmlElement += '<img width="100%" height="100%" src="'+domain+'/images/'+response1.msg[0].domain+'.jpg"  target="_blank">';
+htmlElement += '</div>';
+htmlElement += '</a>'
+});
+       
+       
+        htmlElement += '</div>';
+    }
+    htmlElement += '</div>';
+   
+   
+     
+         $('#main').append(htmlElement)
+    })
             })
-
-
-            var myVar = <% - (listID) %>;
-
-            var list_setting = {
-                "async": true,
-                "crossDomain": true,
-                "url": domain + "/share/list/" + myVar,
-                "method": "GET",
-                "headers": {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-            }
-            $.ajax(list_setting).done(function (response) {
-
-                var htmlElement = " "
-
-
-                htmlElement += '<div id="List_div">';
-                htmlElement += '<div class="div_name">';
-                htmlElement += '<h4>' + response.msg[0].List_name + '</h4>';
-                htmlElement += '</div>';
-
-                htmlElement += '</div>';
-                htmlElement += '<div id="clard_lst" >';
-                for (var cards in response.msg[0].Cards_id) {
-                    htmlElement += ' <div class="cardss">';
-                    var settings = {
-                        "async": false,
-                        "crossDomain": true,
-                        "url": domain + "/share/card/" + response.msg[0].Cards_id[cards],
-                        "method": "GET",
-                        "headers": {
-                            "Content-Type": "application/x-www-form-urlencoded",
-
-                        },
-
-                    }
-
-                    $.ajax(settings).done(function (response1) {
-                        htmlElement += '<a href="' + response1.msg[0].profile_url + '" target="_blank" >';
-                        htmlElement += '<div class = "name">';
-
-                        htmlElement += '<p>' + response1.msg[0].name + '</p>';
-                        htmlElement += '</div>';
-                        htmlElement += '<div class=pic >';
-                        htmlElement += '<img width="100%" height="100%" src="' + domain + '/images/' + response1.msg[0].domain + '.jpg"  target="_blank">';
-
-                        htmlElement += '</div>';
-                        htmlElement += '</a>'
-                    });
-
-
-
-
-                    htmlElement += '</div>';
-
-                }
-                htmlElement += '</div>';
-
-
-
-
-
-                $('#main').append(htmlElement)
-            })
-        })
-
-
-    </script>
+        
+       </script>
 </body>
-
 </html>
