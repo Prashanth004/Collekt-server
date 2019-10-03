@@ -7,7 +7,7 @@ const Token = require('../models/token');
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
-});
+}); 
 
 passport.deserializeUser((id, done) => {
     User.findById(id).then((user) => {

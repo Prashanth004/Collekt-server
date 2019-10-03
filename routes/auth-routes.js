@@ -1,19 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const router = require('express').Router();
 const passport = require('passport');
 const emailVarification = require('../controllers/emailVarify.controller')
