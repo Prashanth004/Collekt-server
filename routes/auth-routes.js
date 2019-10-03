@@ -37,10 +37,12 @@ router.get('/google', passport.authenticate('google', {
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
       dataframe={
-        close:1,
         refresh:1
       }
+setTimeout(function(){
       io.sockets.emit('closeiframe', dataframe)
+      io.sockets.emit('setPopWithHome'," ")
+},500);
     return res.render('redirect.ejs')
 });
 
