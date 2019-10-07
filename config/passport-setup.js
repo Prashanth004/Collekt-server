@@ -27,9 +27,9 @@ passport.use(
         // options for google strategy
         clientID: keys.google.clientID,
         clientSecret: keys.google.clientSecret,
-        callbackURL: 'https://bookmane.in/collekt/auth/google/redirect'
+        callbackURL: 'https://collekt.bookmane.in/auth/google/redirect'
     }, (accessToken, refreshToken, email, done) => {
-      
+    
         var currentdate = new Date();
         var datetime = "Last Sync: " + currentdate.getDate() + "/"
             + (currentdate.getMonth() + 1) + "/"
