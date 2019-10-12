@@ -4,16 +4,7 @@ const io = require('../app')
 var csv      = require('csv-express');
 
 exports.test = function (req, res) {
-    if (!req.user) {
 
-        res.status(401).send({
-            login_status: 0,
-            active_status: 0,
-           
-
-        })
-    }
-    else {
         if (req.user.active == 1) {
             res.status(200).send({
                 login_status: 1,
@@ -31,8 +22,6 @@ exports.test = function (req, res) {
             })
 
         }
-
-    }
 
 };
 exports.product_update = function (req, res, next) {
@@ -181,13 +170,13 @@ exports.product_create = function (req, res, next) {
     if (!req.user) {
         res.status(401).send({ success: 0, msg: "You should login" })
     } else {
-
-        Card.find({ session_id: req.user._id, unq_name:req.body.unq_name}, function (err, product) {
+        console.log("user id : ",req.user._id)
+        Card.find({ user_id: req.user._id, unq_name:req.body.unq_name}, function (err, product) {
             if (err) res.status(400).send(err);
             if (product.length == 0) {
                 let product = new Card(
                     {
-                        session_id: req.user._id,
+                        user_id: req.user._id,
                         name: req.body.name,
                         profile_url: req.body.profile_url,
                         why: req.body.why,
@@ -324,11 +313,19 @@ exports.product_details_all = function (req, res, next) {
     if (!req.user) {
         res.status(401).send({ success: 0, msg: "You should login" })
     } else {
-
-        Card.find({ session_id: req.user._id }, function (err, product) {
+        console.log("req.user when trying to find the all cards : ", req.user);
+        Card.find({user_id: req.user._id }, function (err, product) {
+            console.log("products : ",product);
             if (err) res.status(400).send(err);
             res.send(product);
         })
+
+
+
+        // Card.find({ session_id: req.user._id }, function (err, product) {
+        //     if (err) res.status(400).send(err);
+        //     res.send(product);
+        // })
     }
 }
 

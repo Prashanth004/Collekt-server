@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+}
+
+body{
+  background-color: rgb(248, 245, 245);
+}
+.noButton{
+  border-style:none;
+  background-color: transparent;
+  outline:none;
+
+}
+.noButton:hover{
+  outline:none;
+}
+.noButton:focus{
+  outline:none;
+}

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let ProductSchema = new Schema({
-    session_id: { type: String, required: true },
+    user_id: { type: String, required: true },
     name: { type: String, required: true, max: 100 },
     unq_name:{type: String,required: true },
     profile_url: { type: String, required: true },

@@ -1,0 +1,4 @@
+export const USER_LOGEDIN = "USER_LOGEDIN";
+export const USER_NOT_LOGEDIN = "USER_NOT_LOGEDIN";
+export const UPDATE_CARDS = "UPDATE_CARDS"
+export const UPDATE_LIST = "UPDATE_LIST";

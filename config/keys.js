@@ -5,6 +5,7 @@ module.exports = {
         clientID: '308795475823-1uvk577becdqe5dpekouia3juuu961f8.apps.googleusercontent.com',
         clientSecret: 'pSgqGWwk1Rmm0k-BUSoTTO3D'
     },
+    secret:"thebookmaneisawesomeiguess",
     mongodb: {
         dbURI: 'mongodb://localhost/myappdatabase'
     },

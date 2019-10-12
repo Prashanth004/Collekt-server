@@ -5,16 +5,20 @@ var socket = require('socket.io');
 
 
 exports.list_create = function (req, res, next) {
+    console.log("req.user : ",req.user)
     if (!req.user) {
         res.status(401).send({ success: 0, msg: "You should login" })
     } else {
 
-        Lists.find({ session_id: req.session.userId, name: req.body.list_name }, function (err, lists) {
-            if (err) res.status(400).send(err);
+        Lists.find({ user_id: req.user._id, name: req.body.list_name }, function (err, lists) {
+            if (err) {
+                console.log("error : ",err)
+                res.status(400).send(err);
+            }
             if (lists.length == 0) {
                 let new_list = new Lists(
                     {
-                        session_id: req.user._id,
+                        user_id: req.user._id,
                         List_name: req.body.list_name,
                         Cards_id: req.body.Cards_id
                     });
@@ -52,7 +56,7 @@ exports.list_get = function (req, res, next) {
         res.status(401).send({ success: 0, msg: "You should login" })
     } else {
 
-        Lists.find({ session_id: req.user._id }, function (err, data) {
+        Lists.find({ user_id: req.user._id }, function (err, data) {
             if (err) res.status(400).send(err);
             res.status(200).send(data);
 
@@ -70,7 +74,7 @@ exports.list_get_id = function (req, res, next) {
         res.status(401).send({ success: 0, msg: "You should login" })
     } else {
 
-        Lists.find({ session_id: req.user._id, _id: req.params.id }, function (err, data) {
+        Lists.find({ user_id: req.user._id, _id: req.params.id }, function (err, data) {
             if (err) res.status(400).send(err);
             res.status(200).send(data);
 
@@ -87,14 +91,16 @@ exports.list_update_add_card = function (req, res, next) {
     } else {
 
         var exists = 1
-        var limit = 1
-        Lists.find({ session_id: req.user._id, _id: req.params.id }, function (err, data) {
+        var limit = 1;
+        console.log("req.params.id : req.body.Cards_id : ", req.params.id ,req.body.Cards_id)
+        Lists.find({ user_id: req.user._id, _id: req.params.id }, function (err, data) {
             for (var i in data[0].Cards_id) {
                 if (data[0].Cards_id[i] == req.body.Cards_id) {
                     exists = 0
                 }
             }
-            Cards.find({ session_id: req.user._id, _id: req.body.Cards_id }, function (err, data) {
+            Cards.find({ user_id: req.user._id, _id: req.body.Cards_id }, function (err, data) {
+                console.log("data from cards : ",data)
                 if ((data[0].lists).length > 2) {
                     limit = 0
                 }

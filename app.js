@@ -1,8 +1,9 @@
 const express = require('express');
 var socket = require('socket.io');
 const passport = require('passport');
-const cookieSession = require('cookie-session');
-const passportSetup = require('./config/passport-setup');
+// const cookieSession = require('cookie-session');
+require('./config/passport-setup');
+require('./config/passport-jwt')(passport);
 const bodyParser = require('body-parser');
 const product = require('./routes/Card.route'); // Imports routes for the products
 const lists = require('./routes/List.router')
@@ -12,15 +13,12 @@ const admin = require('./routes/admin.route')
 const authRoutes = require('./routes/auth-routes')
 const basic = require('./routes/basic-routes')
 const mongoose = require('mongoose');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+// const session = require('express-session');
+// const MongoStore = require('connect-mongo')(session);
 const app = express();
-const keys = require('./config/keys');
-const listData = require('./controllers/List.controller')
-app.use(cookieSession({
-  maxAge: 24 * 60 * 60 * 1000,
-  keys: [keys.session.cookieKey]
-}));
+var cors = require('cors')
+app.use(cors())
+
 app.use(passport.initialize());
 
 app.use(passport.session());

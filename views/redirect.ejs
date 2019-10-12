@@ -7,9 +7,13 @@
     <title>Document</title>
     <Script>
         window.onload = function(){
+            var token = <%- (token) %>;
+           
             setTimeout(function(){
-                window.close();
-            },2000);
+                console.log("token : ",token)
+            localStorage.setItem('token',JSON.stringify(token))
+                // window.close();
+            },3000);
         }
     </Script>
 </head>

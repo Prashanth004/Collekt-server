@@ -4,6 +4,7 @@ const keys = require('./keys');
 const User = require('../models/user.js');
 const Admin = require('../models/admin')
 const Token = require('../models/token');
+const crypto = require('crypto')
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -27,7 +28,7 @@ passport.use(
         // options for google strategy
         clientID: keys.google.clientID,
         clientSecret: keys.google.clientSecret,
-        callbackURL: 'https://collekt.bookmane.in/auth/google/redirect'
+        callbackURL: 'http://localhost:1234/auth/google/redirect'
     }, (accessToken, refreshToken, email, done) => {
     
         var currentdate = new Date();
@@ -47,7 +48,8 @@ passport.use(
                 new User({
                     password: email.id,
                     passwordConf: email.id,
-                    username: email.displayName,
+                    username:(email.emails[0].value).split('@')[0],
+                    displayname: email.displayName,
                     email: email.emails[0].value,
                     profilePicture: email._json.image.url,
                     date: datetime,
@@ -59,15 +61,15 @@ passport.use(
                 }).save().then((newUser) => {
                     var token = new Token({ _userId: User._id, token: crypto.randomBytes(16).toString('hex') });
                     token.save(function (err) {
-                        if (err) { return res.status(500).send({ msg: err.message }); }
+                        if (err) {  return done(null, false, { message: 'Incorrect email or password.' }); }
 
                         // Send the email
-                        var transporter = nodemailer.createTransport({ service: 'Gmail', auth: { user: keys.gmailDetails.mail, pass: keys.gmailDetails.password } });
-                        var mailOptions = { from: 'no-reply@Konectr.in', to: User.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/auth/confirmation\/' + token.token + '.\n' };
-                        transporter.sendMail(mailOptions, function (err) {
-                            if (err) { return res.status(500).send({ msg: err.message }); }
-                            res.status(200).send('A verification email has been sent to ' + user.email + '.');
-                        });
+                        // var transporter = nodemailer.createTransport({ service: 'Gmail', auth: { user: keys.gmailDetails.mail, pass: keys.gmailDetails.password } });
+                        // var mailOptions = { from: 'no-reply@Konectr.in', to: User.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/auth/confirmation\/' + token.token + '.\n' };
+                        // transporter.sendMail(mailOptions, function (err) {
+                        //     if (err) { return done(null, false, { message: 'Incorrect email or password.' });}
+                        //     res.status(200).send('A verification email has been sent to ' + user.email + '.');
+                        // });
                     });
 
                     done(null, newUser);

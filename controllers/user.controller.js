@@ -54,6 +54,7 @@ exports.user_register = function (req, res, next) {
 					var newPerson = new User({
 						email: personInfo.email,
 						username: personInfo.username,
+						displayname : personInfo.displayname,
 						password: personInfo.password,
 						passwordConf: personInfo.passwordConf,
 						date: personInfo.date,
@@ -168,18 +169,18 @@ exports.user_update = function (req, res, next) {
 	}
 }
 exports.test_user = function (req, res) {
-    if (!req.user) {
+    // if (!req.user) {
 
-        res.status(401).send({
-            login_status: 0,
-            active_status: 0
+    //     res.status(401).send({
+    //         login_status: 0,
+    //         active_status: 0
 
-        })
-    }
-    else {
+    //     })
+    // }
+    // else {
 		res.status(200).send(req.user)
 
-    }
+    // }
 
 };
 
