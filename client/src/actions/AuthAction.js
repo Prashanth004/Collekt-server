@@ -9,7 +9,7 @@ export const checkLoginStatus = ()=> async (dispatch)=>{
         axios({
             method:'get',
             crossDomain: true,
-            url:'http://localhost:1234/product/test',
+            url:config.base_dir+'/api/product/test',
             headers:{
                 "Authorization":token,
             }

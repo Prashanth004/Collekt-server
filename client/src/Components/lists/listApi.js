@@ -70,12 +70,5 @@ export const deleteList = (listid) => {
             })
 
     })
-    // "async": true,
-    // "crossDomain": true,
-    // "url": config.domain + "/product/" + _id,
-    // "method": "DELETE",
-    // "headers": {
-    //   "Content-Type": "application/x-www-form-urlencoded",
-
-    // }
+ 
 }

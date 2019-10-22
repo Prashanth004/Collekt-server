@@ -25,7 +25,9 @@ const SearchBar = (props) => {
   const { changeSearch,page } = props;
   console.log("page value : ",page)
   return (<div style={{ marginTop: "5px" }}>
-    <InputBox placeHolder={page!=="lists"?"Search card's name or reason":" Search by list's or card's name"} onChangeFunct={changeSearch} />
+    <InputBox  value='' placeHolder={page!=="lists"?"Search card's name or reason":" Search by list's or card's name"} 
+    onChangeFunct={changeSearch}
+    moreStyle={{width:"350px"}} />
   </div>)
 }
 function Index(props) {

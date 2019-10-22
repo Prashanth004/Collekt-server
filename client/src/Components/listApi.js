@@ -1,5 +1,7 @@
 import { checkExtensionForToken } from '../actions/utils';
 import axios from 'axios';
+import config from '../config/config'
+
 export const createNewList = (listName) => {
     return new Promise(async (resolve,reject)=>{
         var token = JSON.parse(localStorage.getItem('token'));
@@ -8,7 +10,7 @@ export const createNewList = (listName) => {
             axios({
                 method: 'post',
                 crossDomain: true,
-                url: 'http://localhost:1234/list/create',
+                url: config.base_dir+'/api/list/create',
                 headers: {
                     "Authorization": token,
                 },
@@ -32,7 +34,7 @@ export const getAllList = () => {
         axios({
             method: 'get',
             crossDomain: true,
-            url: 'http://localhost:1234/list/',
+            url: config.base_dir+'/api/list/',
             headers: {
                 "Authorization": token,
             }
@@ -58,12 +60,27 @@ export const deleteList = (listid) => {
             axios({
                 method: 'delete',
                 crossDomain: true,
-                url: 'http://localhost:1234/list/'+listid,
+                url: config.base_dir+'/api/list/'+listid,
                 headers: {
                     "Authorization": token,
                 }
             }).then(response => {
-                resolve(response.data)
+                axios({
+                    method:'put',
+                    crossDomain : true,
+                    url:config.base_dir+'/api/product/rmall/list/',
+                    headers: {
+                        "Authorization": token,
+                    },
+                    data:{
+                        listId:listid
+                    }
+                }).then(response=>{
+                    resolve(response.data)
+                }).catch(error=>{
+                    reject(error)
+                })
+              
             })
             .catch(error=>{
                 reject(error)
@@ -81,7 +98,7 @@ export const getAListDetails = (listid)=>{
         axios({
             method: 'get',
             crossDomain: true,
-            url: 'http://localhost:1234/list/'+listid,
+            url: config.base_dir+'/api/list/'+listid,
             headers: {
                 "Authorization": token,
             }
@@ -118,7 +135,7 @@ const getCardDetails =(cardsArray,token)=>{
                 axios({
                     method: 'get',
                     crossDomain: true,
-                    url: 'http://localhost:1234/product/'+cardid,
+                    url: config.base_dir+'/api/product/'+cardid,
                     headers: {
                         "Authorization": token,
                     }
@@ -133,4 +150,42 @@ const getCardDetails =(cardsArray,token)=>{
             reject(error)
         })
 })
+}
+
+export const removeCardFromList = async (cardId,listId)=>{
+    return new Promise(async (resolve,reject)=>{
+        var token = JSON.parse(localStorage.getItem('token'));
+        if (token === null || token === undefined || token === "")
+            token = await checkExtensionForToken();
+        let promises = [
+            axios({
+                method: 'put',
+                crossDomain: true,
+                url: config.base_dir+'/api/list/rm/product/'+listId,
+                headers: {
+                    "Authorization": token,
+                },
+                data: {
+                          "Cards_id": cardId,
+                }
+            }),
+            axios({
+                method: 'put',
+                crossDomain: true,
+                url: config.base_dir+'/api/product/rm/list/'+cardId,
+                headers: {
+                    "Authorization": token,
+                },
+                data: {
+                          "listId": listId,
+                }
+            }),
+    
+        ];
+        axios.all(promises).then(resposnse=>{
+            resolve(resposnse)
+        }).catch(error=>{
+           reject(error)
+        })
+    })  
 }

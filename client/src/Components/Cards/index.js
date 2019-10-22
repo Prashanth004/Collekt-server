@@ -14,9 +14,10 @@ import Nav from '../Nav/index';
 class IndexHome extends Component {
     constructor(props){
         super(props);
-        this.state={cards:[]};
+        this.state={cards:[],fetchedList:false};
         this.filterCards = this.filterCards.bind(this);
         this.changeCardsSearch = this.changeCardsSearch.bind(this);
+        this.deleteCard = this.deleteCard.bind(this);
     }
     componentDidMount(){
         const {listUpdated,cardsUpdated,updateCards,updateList} = this.props;
@@ -28,6 +29,7 @@ class IndexHome extends Component {
                 if(!listUpdated){
                     try{
                         const allList  = await getAllList();
+                        this.setState({fetchedList:true})
                         updateList(allList);
                     }
                     catch(error){}
@@ -40,6 +42,12 @@ class IndexHome extends Component {
         else{
             this.setState({ cards:this.props.cards });
         }
+    }
+    deleteCard(cardId){
+        var newCards = this.state.cards.filter(card=>{
+            return(card._id!==cardId)
+        })
+        this.setState({cards:newCards})
     }
     changeCardsSearch(e){
         this.filterCards({
@@ -59,9 +67,10 @@ class IndexHome extends Component {
     }
 
     render() {
-        const {  cards } = this.state;
-        const {changeCardsSearch} = this;
-        const cardsDi = cards.map(card => (<Card card={card} />))
+        const {  cards,fetchedList } = this.state;
+        const {changeCardsSearch,deleteCard} = this;
+        const {listUpdated} = this.props;
+        const cardsDi = (fetchedList || listUpdated) ? (cards.map(card => (<Card card={card} deleteCard={deleteCard}/>))):<p>Loading...</p>
 
         return (<div><Nav changeSeacrch={changeCardsSearch} /><div className="container cardContainer" >
         {cardsDi}

@@ -1,4 +1,4 @@
-const conf = {
+export default {
     base_dir:"http://localhost:1234",
     EXTENSION_ID :"mjapahakacmpbiafooofjdfloinbmidf",
 

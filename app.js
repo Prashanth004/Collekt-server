@@ -45,11 +45,11 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use('/', basic );
 app.use('/auth', authRoutes);
-app.use('/product', product);
-app.use('/list', lists);
-app.use('/user', user);
-app.use('/admin', admin);
-app.use('/share', share);
+app.use('/api/product', product);
+app.use('/api/list', lists);
+app.use('/api/user', user);
+app.use('/api/admin', admin);
+app.use('/api/share', share);
 
 // app.get('/facen')
 app.use([

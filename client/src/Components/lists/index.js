@@ -30,12 +30,14 @@ const filterTextFromCards = (cards,list,text)=>{
 class IndexList extends Component {
     constructor(props) {
         super(props)
-        this.state = { ListName: '',lists:[],showSuccess:false}
+        this.state = { ListName: '',lists:[],showSuccess:false,fetchedCards:false}
         this.setListName = this.setListName.bind(this);
         this.createList = this.createList.bind(this);
         this.deleteList = this.deleteList.bind(this);
-        this.changeListSeacrch = this.changeListSeacrch.bind(this)
+        this.changeListSeacrch = this.changeListSeacrch.bind(this);
+    
     }
+   
     async componentDidMount() {
         if(!this.props.listUpdated){
             const allList  = await getAllList();
@@ -48,11 +50,13 @@ class IndexList extends Component {
         const fetchCards= async ()=>{
             var cards = await getAllCards();
             this.props.updateCards(cards);
+            this.setState({fetchedCards:true})
         }
         if(!this.props.cardsUpdated)
             fetchCards();      
       
     }
+
     async createList(ListName){
       const newList = await createNewList(ListName);
       var presList = this.state.lists;
@@ -93,8 +97,9 @@ class IndexList extends Component {
 
     render() {
         console.log("rerendering")
-        const {ListName,showSuccess,lists} = this.state;
+        const {ListName,showSuccess,lists,fetchedCards} = this.state;
         const {setListName,createList,deleteList,changeListSeacrch}= this;
+        const {cards,cardsUpdated} = this.props;
      
         
         return (
@@ -111,8 +116,8 @@ class IndexList extends Component {
                     </InputGroup>
                 </div>
                 {showSuccess?<p>Created list successfully !!</p>:null}
-                <div className="cardContainer">
-                {lists.map(list => (<List list={list}deleteList={deleteList}/>))}
+                <div className="cardContainer" style={{gridColumnsGap:'40px'}}>
+                {(cardsUpdated || fetchedCards)?(lists.map(list => (<List list={list}deleteList={deleteList }cards={cards}/>))):(<p>Loading...</p>)}
                 </div>
             </div></div>
         )

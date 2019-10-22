@@ -11,6 +11,20 @@ body{
   outline:none;
 
 }
+.standButton{
+  border-style:solid;
+  border-width:0.5px;
+  border-color:rgb(151, 108, 158);
+  background-color: rgb(151, 108, 158);
+  border-radius:3px;
+  color:white;
+}
+.standButton:focus{
+  outline:none
+}
+.standButton:active{
+  outline:none
+}
 .noButton:hover{
   outline:none;
 }
